@@ -1,6 +1,6 @@
-ARG VERSION_PARENT=v0.0.38
+ARG VERSION_PARENT=jh5-0.0.1
 
-FROM gitlab-registry.cern.ch/swan/docker-images/jupyter/swan:${VERSION_PARENT}
+FROM gitlab-registry.cern.ch/troun/jupyter-user-images/swan:${VERSION_PARENT}
 
 LABEL maintainer="swan-admins@cern.ch"
 ARG NB_UID="1000"

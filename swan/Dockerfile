@@ -3,9 +3,9 @@
 # This installs the SWAN packages to enable 
 # using Jupyter with EOS and CVMFS
 
-ARG VERSION_PARENT=v0.0.5
+ARG VERSION_PARENT=jh5-0.0.1
 
-FROM gitlab-registry.cern.ch/swan/docker-images/jupyter/base:${VERSION_PARENT}
+FROM gitlab-registry.cern.ch/troun/jupyter-user-images/base:${VERSION_PARENT}
 
 LABEL maintainer="swan-admins@cern.ch"
 
