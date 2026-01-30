@@ -86,8 +86,8 @@ RUN mamba install --yes \
 
 # Install all of our extensions
 # Ignore (almost all) dependencies because they have already been installed or come from CVMFS
+RUN pip install --no-deps --no-cache-dir --index-url=https://test.pypi.org/simple/ tomasr-swancontents==2.1.16
 RUN pip install --no-deps --no-cache-dir \
-    swancontents==2.1.15 \
     swanhelp==3.0.3 \
     swankernelenv==1.0.0 \
     swanoauthrenew==1.0.2  \
