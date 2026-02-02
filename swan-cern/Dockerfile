@@ -1,4 +1,4 @@
-ARG VERSION_PARENT=jh5-0.0.1
+ARG VERSION_PARENT=jh5-0.0.3
 
 FROM gitlab-registry.cern.ch/troun/jupyter-user-images/swan:${VERSION_PARENT}
 
