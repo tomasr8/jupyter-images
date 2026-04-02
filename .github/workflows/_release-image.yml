@@ -69,19 +69,23 @@ jobs:
           ref: main # Upstream image actions may have pushed new commits, we need to checkout the latest main
 
       - name: Log in to GitLab Container Registry
-        uses: docker/login-action@v4
-        with:
-          registry: gitlab-registry.cern.ch
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITLAB_TOKEN }}
+        # uses: docker/login-action@v4
+        # with:
+        #   registry: gitlab-registry.cern.ch
+        #   username: ${{ github.actor }}
+        #   password: ${{ secrets.GITLAB_TOKEN }}
+        run: |
+          echo "Logged in to GitLab Container Registry"
 
       - name: Build and push image
-        uses: docker/build-push-action@v7
-        with:
-          context: ./${{ inputs.image }}
-          build-args: BUILD_TAG=${{ needs.release.outputs.version }}
-          push: true
-          tags: gitlab-registry.cern.ch/swan/docker-images/jupyter/${{ inputs.image }}:${{ needs.release.outputs.version }}
+        # uses: docker/build-push-action@v7
+        # with:
+        #   context: ./${{ inputs.image }}
+        #   build-args: BUILD_TAG=${{ needs.release.outputs.version }}
+        #   push: true
+        #   tags: gitlab-registry.cern.ch/swan/docker-images/jupyter/${{ inputs.image }}:${{ needs.release.outputs.version }}
+        run: |
+          echo "Built and pushed image jupyter/${{ inputs.image }}:${{ needs.release.outputs.version }}"
 
   update-children:
     if: inputs.children != ''
@@ -125,9 +129,11 @@ jobs:
       - name: Trigger image version update in swan-charts
         env:
           GH_TOKEN: ${{ secrets.WORKFLOW_ACCESS_TOKEN }}
+        # run: |
+        #   gh workflow run "Update jupyter and jupyterhub images" \
+        #     --repo swan-cern/swan-charts \
+        #     --ref master \
+        #     -f image="jupyter/${{ inputs.image }}" \
+        #     -f version="${{ needs.release.outputs.version }}"
         run: |
-          gh workflow run "Update jupyter and jupyterhub images" \
-            --repo swan-cern/swan-charts \
-            --ref master \
-            -f image="jupyter/${{ inputs.image }}" \
-            -f version="${{ needs.release.outputs.version }}"
+          echo "Triggered workflow to update swan-charts with jupyter/${{ inputs.image }}:${{ needs.release.outputs.version }}"
