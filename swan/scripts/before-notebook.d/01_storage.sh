@@ -38,7 +38,10 @@ then
     _log "Updated the user home to $HOME."
 fi
 
-# Make sure the user has the SWAN_projects folder
-run_as_user mkdir -p $HOME/SWAN_projects
+# Make sure the user has the SWAN_projects folder (Only if EOS_ENABLED==true)
+if [ "$EOS_ENABLED" == "true" ]
+then
+    run_as_user mkdir -p $HOME/SWAN_projects
+fi
 
 _log "Finished setting up user session storage"
